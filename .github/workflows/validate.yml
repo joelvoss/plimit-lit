@@ -1,0 +1,31 @@
+name: validate
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request: {}
+jobs:
+  main:
+    strategy:
+      matrix:
+        node: [12, 14, 15]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: ▶️ Run validate script
+        run: ./Taskfile.sh validate
