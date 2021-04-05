@@ -10,9 +10,9 @@ with limited concurrency.
 ## Installation
 
 ```bash
-$ npm i template-node-lib
+$ npm i plimit-lit
 # or
-$ yarn add template-node-lib
+$ yarn add plimit-lit
 ```
 
 ## Usage
