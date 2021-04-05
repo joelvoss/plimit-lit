@@ -12,10 +12,6 @@ fi
 # //////////////////////////////////////////////////////////////////////////////
 # START tasks
 
-start() {
-  node dist/node-lib.js
-}
-
 build() {
   jvdx build --clean --format=es,cjs --target=node $*
 }
@@ -44,7 +40,6 @@ clean() {
 
 default() {
   build
-  start
 }
 
 # END tasks
