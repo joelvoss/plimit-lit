@@ -14,7 +14,12 @@
   },
   "source": "src/index.js",
   "main": "dist/plimit-lit.js",
-  "module": "dist/plimit-lit.module.js",
+  "module": "dist/plimit-lit.m.js",
+  "exports": {
+    "require": "./dist/plimit-lit.js",
+    "default": "./dist/plimit-lit.modern.js"
+  },
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "LICENSE"
