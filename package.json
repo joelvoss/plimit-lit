@@ -30,10 +30,10 @@
     "prepublishOnly": "./Taskfile.sh build"
   },
   "dependencies": {
-    "queue-lit": "^1.1.1"
+    "queue-lit": "^1.1.2"
   },
   "devDependencies": {
-    "@jvdx/core": "^2.3.1"
+    "@jvdx/core": "^2.3.4"
   },
   "prettier": "@jvdx/prettier-config",
   "prettierIgnore": [
