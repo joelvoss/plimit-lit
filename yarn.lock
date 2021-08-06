@@ -1227,10 +1227,10 @@
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-async-to-promises "^0.8.15"
 
-"@jvdx/core@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@jvdx/core/-/core-2.4.0.tgz#5f5e457a1963b2bd75a617b17aa0ceeae02fbe2b"
-  integrity sha512-XANQVY9MMAOMCxYXYcjzFOpsjAICi91O3Mk/lE3+CZ6tvA/SPgPENiDdbw7IRT6QYBfzmHF2z9EhfC3epSUWHA==
+"@jvdx/core@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@jvdx/core/-/core-2.4.1.tgz#3d96487460555820e32c21176cdfa7558bba0cac"
+  integrity sha512-wIY6nOwXKHutNI6apyf0b3FvXRMmaNCs+IHqMr9OI4TrnrHlX6Q2MVtC6yNBcJqmNDF2Wiuu5G+3jVW3kKFC4g==
   dependencies:
     "@babel/core" "7.15.0"
     "@jvdx/babel-preset" "1.2.4"
@@ -1259,7 +1259,7 @@
     postcss "8.3.6"
     prettier "2.3.2"
     pretty-bytes "5.6.0"
-    readpkg-lit "1.1.6"
+    readpkg-lit "1.1.7"
     rimraf "3.0.2"
     rollup "2.56.0"
     rollup-plugin-bundle-size "1.0.3"
@@ -2913,12 +2913,12 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-findup-lit@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/findup-lit/-/findup-lit-1.1.3.tgz#db45b2a215e0e896504e259b13c56ffc2dfd92ba"
-  integrity sha512-CqrE2RmHCsOjgoDG5aiaKlQpbtNZr0uWrajuibMjAVEumDV6E4obGDNR+sGwNFyF5sg6mE059N6O4s70aRpStw==
+findup-lit@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/findup-lit/-/findup-lit-1.1.5.tgz#ccc8be6e1f4c9d2e0e0b833efcce3d70808d7223"
+  integrity sha512-FzMO/tap7bC78IoT5GeZ51ubU8CrGhnoZblc3SLbJPu49j7D5SqmsxLwZ6t2750/O3Pyj56KA+6X3cgpsttBQA==
   dependencies:
-    plimit-lit "^1.1.3"
+    plimit-lit "^1.1.4"
 
 flat-cache@^3.0.4:
   version "3.0.4"
@@ -4603,7 +4603,7 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-plimit-lit@^1.1.3:
+plimit-lit@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/plimit-lit/-/plimit-lit-1.1.4.tgz#89708f659bd92ba4c08cac013c6cb439dc31068e"
   integrity sha512-t3MMOujyPkE7xQcCA1CkCO9tzc4AncW0Jo8FTAmgkEtJp4Yx2iKePtZZFL9t8IdtEuE3buJvK5384SmV4tMb2A==
@@ -5065,12 +5065,12 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-readpkg-lit@1.1.6, readpkg-lit@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/readpkg-lit/-/readpkg-lit-1.1.6.tgz#8f05056b402e2cf2d1ba7904f463c243f5f53083"
-  integrity sha512-xR37H7D++AWBdgDKLjiwo6NJ5P/2mdixFCl1ekTMabpYVOAW4BaMza3K05qpeSUzzhkE+wg8z8YQbiMegM8cPg==
+readpkg-lit@1.1.7, readpkg-lit@^1.1.6:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/readpkg-lit/-/readpkg-lit-1.1.7.tgz#2d833a537ccd49e89044bf013bec65c5819bb726"
+  integrity sha512-7hO94ZRikdsuw+wnU36Y411i2yJG6khcdEGlt9Q46N5Xsk7Xo+PivUQHnQSXYt0HZf+vfQnCWZGj84QlIyMjtw==
   dependencies:
-    findup-lit "^1.1.3"
+    findup-lit "^1.1.5"
     normalize-package-data "^3.0.2"
 
 regenerate-unicode-properties@^8.2.0:
