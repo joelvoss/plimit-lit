@@ -12,11 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/joelvoss/plimit-lit.git"
   },
+  "type": "module",
   "source": "src/index.js",
-  "main": "dist/plimit-lit.js",
-  "module": "dist/plimit-lit.m.js",
+  "main": "dist/plimit-lit.cjs",
+  "module": "dist/plimit-lit.module.js",
   "exports": {
-    "require": "./dist/plimit-lit.js",
+    "require": "./dist/plimit-lit.cjs",
     "import": "./dist/plimit-lit.modern.js"
   },
   "types": "dist/index.d.ts",
