@@ -1,7 +1,7 @@
 {
   "name": "plimit-lit",
   "description": "This package is a helper to run multiple promise-returning & async functions with limited concurrency.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "author": "Joel Voß <mail@joelvoss.com>",
   "license": "MIT",
   "homepage": "https://github.com/joelvoss/plimit-lit",
