@@ -17,6 +17,7 @@
   "main": "dist/plimit-lit.cjs",
   "module": "dist/plimit-lit.module.js",
   "exports": {
+    "types": "./dist/index.d.ts",
     "require": "./dist/plimit-lit.cjs",
     "import": "./dist/plimit-lit.modern.js"
   },
