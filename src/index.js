@@ -4,7 +4,6 @@ import { Queue } from 'queue-lit';
  * pLimit creates a "limiter" function that can be used to enqueue
  * promise returning functions with limited concurrency.
  * @param {number} concurrency
- * @returns {(fn: Function, ...args: any[]) => Promise<any>}
  */
 export function pLimit(concurrency) {
 	if (
@@ -77,9 +76,11 @@ export function pLimit(concurrency) {
 	/**
 	 * generator defines the public api of `pLimit` and allows enqueueing promise
 	 * returning functions while limiting their concurrency.
-	 * @param {Function} fn
-	 * @param  {...any} args
-	 * @returns {Promise<any>}
+	 * @param {(...args: Arguments) => PromiseLike<RType> | RType} fn
+	 * @param  {Arguments} args
+	 * @returns {Promise<RType>}
+	 * @template {unknown[]} Arguments
+	 * @template RType
 	 */
 	const generator = (fn, ...args) =>
 		new Promise(resolve => {
