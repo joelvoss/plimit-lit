@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/joelvoss/plimit-lit.git"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "type": "module",
   "source": "src/index.js",
   "main": "dist/plimit-lit.cjs",
@@ -32,10 +35,10 @@
     "prepublishOnly": "./Taskfile.sh build"
   },
   "dependencies": {
-    "queue-lit": "^1.5.0"
+    "queue-lit": "^1.5.1"
   },
   "devDependencies": {
-    "@jvdx/core": "^3.5.0"
+    "@jvdx/core": "^3.6.0"
   },
   "prettier": "@jvdx/prettier-config",
   "prettierIgnore": [
