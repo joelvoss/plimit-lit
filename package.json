@@ -12,9 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/joelvoss/plimit-lit.git"
   },
-  "engines": {
-    "node": ">=18"
-  },
   "type": "module",
   "source": "src/index.js",
   "main": "dist/plimit-lit.cjs",
