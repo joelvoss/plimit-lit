@@ -13,7 +13,7 @@
     "url": "git+https://github.com/joelvoss/plimit-lit.git"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=18"
   },
   "type": "module",
   "source": "src/index.js",
