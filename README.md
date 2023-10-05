@@ -3,10 +3,6 @@
 This package is a helper to run multiple promise-returning & async functions
 with limited concurrency.
 
-## Requirements
-
-- Node v12+
-
 ## Installation
 
 ```bash
