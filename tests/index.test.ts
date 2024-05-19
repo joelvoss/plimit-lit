@@ -1,10 +1,13 @@
-function delay(ms) {
+import { describe, expect, test } from 'vitest';
+import { pLimit } from '../src/index';
+
+function delay(ms: number) {
 	return new Promise(r => setTimeout(r, ms));
 }
 
-function inRange(num, { start = 0, end }) {
-	const min = (left, right) => (left < right ? left : right);
-	const max = (left, right) => (left > right ? left : right);
+function inRange(num: number, { start = 0, end = 0 }) {
+	const min = (left: number, right: number) => (left < right ? left : right);
+	const max = (left: number, right: number) => (left > right ? left : right);
 	return num >= min(start, end) && num <= max(end, start);
 }
 
@@ -18,27 +21,27 @@ function timeSpan() {
 	return () => end();
 }
 
-function randomInt(min, max) {
+function randomInt(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 describe(`pLimit`, () => {
-	const { pLimit } = require('../src/index');
-
-	it('throws on invalid concurrency argument', () => {
+	test('throws on invalid concurrency argument', () => {
 		const err = /Expected `concurrency` to be a number greater than 1/;
 
 		expect(() => pLimit(0)).toThrowError(err);
 		expect(() => pLimit(-1)).toThrowError(err);
 		expect(() => pLimit(1.2)).toThrowError(err);
+		// @ts-expect-error Testing bad input
 		expect(() => pLimit(undefined)).toThrowError(err);
+		// @ts-expect-error Testing bad input
 		expect(() => pLimit(true)).toThrowError(err);
 	});
 
-	it('should handle `concurrency = 1`', async () => {
-		const input = [
+	test('should handle `concurrency = 1`', async () => {
+		const input: [number, number][] = [
 			[10, 300],
 			[20, 200],
 			[30, 100],
@@ -58,7 +61,7 @@ describe(`pLimit`, () => {
 		expect(inRange(end(), { start: 590, end: 650 })).toEqual(true);
 	});
 
-	it('should handle `concurrency = 5`', async () => {
+	test('should handle `concurrency = 5`', async () => {
 		const concurrency = 5;
 		let running = 0;
 
@@ -76,7 +79,7 @@ describe(`pLimit`, () => {
 		await Promise.all(input);
 	});
 
-	it('should handle non-promise returning function', async () => {
+	test('should handle non-promise returning function', async () => {
 		const limit = pLimit(1);
 
 		let thrown = false;
@@ -89,7 +92,7 @@ describe(`pLimit`, () => {
 		expect(thrown).toEqual(false);
 	});
 
-	it('should continue after a sync throw', async () => {
+	test('should continue after a sync throw', async () => {
 		const limit = pLimit(1);
 		let ran = false;
 
@@ -107,7 +110,7 @@ describe(`pLimit`, () => {
 		expect(ran).toEqual(true);
 	});
 
-	it('should accept additional arguments', async () => {
+	test('should accept additional arguments', async () => {
 		const limit = pLimit(1);
 		const symbol = Symbol('test');
 
@@ -116,7 +119,7 @@ describe(`pLimit`, () => {
 		}, symbol);
 	});
 
-	it('should surface errors in limited functions', async () => {
+	test('should surface errors in limited functions', async () => {
 		const limit = pLimit(1);
 		const error = new Error('err');
 
@@ -140,7 +143,7 @@ describe(`pLimit`, () => {
 		}
 	});
 
-	it('should update `activeCount` and `pendingCount` properties', async () => {
+	test('should update `activeCount` and `pendingCount` properties', async () => {
 		const limit = pLimit(5);
 		expect(limit.activeCount).toEqual(0);
 		expect(limit.pendingCount).toEqual(0);
@@ -177,7 +180,7 @@ describe(`pLimit`, () => {
 		expect(limit.pendingCount).toEqual(0);
 	});
 
-	it('should clear the current queue on `clearQueue`', async () => {
+	test('should clear the current queue on `clearQueue`', async () => {
 		const limit = pLimit(1);
 
 		Array.from({ length: 1 }, () => limit(() => delay(1000)));

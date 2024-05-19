@@ -1,11 +1,24 @@
 import { Queue } from 'queue-lit';
 
+type Args = unknown[];
+type Func<T> = (...args: Args) => PromiseLike<T> | Promise<T> | T;
+type Resolve = (value: unknown) => void;
+
+type RunFn = <T>(fn: Func<T>, resolve: Resolve, args: Args) => Promise<void>;
+type EnqueueFn = <T>(fn: Func<T>, resolve: Resolve, args: Args) => void;
+type GeneratorFn = <T>(fn: Func<T>, ...args: Args) => Promise<unknown>;
+
+type Limiter = GeneratorFn & {
+	activeCount: number;
+	pendingCount: number;
+	clearQueue: () => void;
+};
+
 /**
  * pLimit creates a "limiter" function that can be used to enqueue
  * promise returning functions with limited concurrency.
- * @param {number} concurrency
  */
-export function pLimit(concurrency) {
+export function pLimit(concurrency: number) {
 	if (
 		!(
 			(Number.isInteger(concurrency) || concurrency === Infinity) &&
@@ -25,7 +38,7 @@ export function pLimit(concurrency) {
 		activeCount--;
 
 		if (queue.size > 0) {
-			queue.pop()();
+			(queue.pop() as () => void)();
 		}
 	};
 
@@ -33,11 +46,8 @@ export function pLimit(concurrency) {
 	 * run executes a given `fn` passing `args`. Inside the `run` closure any
 	 * thrown errors/rejections are swallowed, but by resolving the `fn` result
 	 * immediatly we surface any rejections/errors to a parent function.
-	 * @param {Function} fn
-	 * @param {Promise.resolve} resolve
-	 * @param {*} args
 	 */
-	const run = async (fn, resolve, args) => {
+	const run: RunFn = async (fn, resolve, args) => {
 		activeCount++;
 
 		const result = (async () => fn(...args))();
@@ -46,18 +56,17 @@ export function pLimit(concurrency) {
 
 		try {
 			await result;
-		} catch {}
+		} catch {
+			/* swallow */
+		}
 
 		next();
 	};
 
 	/**
 	 * enqueue enqueues a given `fn` to be executed while limiting concurrency.
-	 * @param {Function} fn
-	 * @param {Promise.resolve} resolve
-	 * @param {*} args
 	 */
-	const enqueue = (fn, resolve, args) => {
+	const enqueue: EnqueueFn = (fn, resolve, args) => {
 		queue.push(run.bind(null, fn, resolve, args));
 
 		(async () => {
@@ -68,7 +77,7 @@ export function pLimit(concurrency) {
 			await Promise.resolve();
 
 			if (activeCount < concurrency && queue.size > 0) {
-				queue.pop()();
+				(queue.pop() as () => void)();
 			}
 		})();
 	};
@@ -76,13 +85,8 @@ export function pLimit(concurrency) {
 	/**
 	 * generator defines the public api of `pLimit` and allows enqueueing promise
 	 * returning functions while limiting their concurrency.
-	 * @param {(...args: Arguments) => PromiseLike<RType> | RType} fn
-	 * @param  {Arguments} args
-	 * @returns {Promise<RType>}
-	 * @template {unknown[]} Arguments
-	 * @template RType
 	 */
-	const generator = (fn, ...args) =>
+	const generator: GeneratorFn = (fn, ...args) =>
 		new Promise(resolve => {
 			enqueue(fn, resolve, args);
 		});
@@ -101,5 +105,5 @@ export function pLimit(concurrency) {
 		},
 	});
 
-	return generator;
+	return generator as Limiter;
 }
