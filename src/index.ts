@@ -1,12 +1,14 @@
 import { Queue } from 'queue-lit';
 
+type GetFuncT<F extends Func<unknown>> = F extends Func<infer T> ? T : unknown;
+
 type Args = unknown[];
 type Func<T> = (...args: Args) => PromiseLike<T> | Promise<T> | T;
-type Resolve = (value: unknown) => void;
+type Resolve<T> = (value: T | PromiseLike<T>) => void;
 
-type RunFn = <T>(fn: Func<T>, resolve: Resolve, args: Args) => Promise<void>;
-type EnqueueFn = <T>(fn: Func<T>, resolve: Resolve, args: Args) => void;
-type GeneratorFn = <T>(fn: Func<T>, ...args: Args) => Promise<unknown>;
+type RunFn = <T>(fn: Func<T>, resolve: Resolve<T>, args: Args) => Promise<void>;
+type EnqueueFn = <T>(fn: Func<T>, resolve: Resolve<T>, args: Args) => void;
+type GeneratorFn = <T>(fn: Func<T>, ...args: Args) => Promise<T>;
 
 type Limiter = GeneratorFn & {
 	activeCount: number;
@@ -67,7 +69,7 @@ export function pLimit(concurrency: number) {
 	 * enqueue enqueues a given `fn` to be executed while limiting concurrency.
 	 */
 	const enqueue: EnqueueFn = (fn, resolve, args) => {
-		queue.push(run.bind(null, fn, resolve, args));
+		queue.push((run<GetFuncT<typeof fn>>).bind(null, fn, resolve, args));
 
 		(async () => {
 			// NOTE(joel): This function needs to wait until the next microtask
