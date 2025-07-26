@@ -85,7 +85,7 @@ describe(`pLimit`, () => {
 		let thrown = false;
 		try {
 			await limit(() => null);
-		} catch (e) {
+		} catch (_) {
 			thrown = true;
 		}
 

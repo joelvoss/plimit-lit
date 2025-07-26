@@ -35,21 +35,14 @@
     "build": "./Taskfile.sh build"
   },
   "devDependencies": {
-    "@jvdx/eslint-config": "^4.3.0",
-    "@jvdx/prettier-config": "^0.3.4",
-    "@types/node": "^20.12.11",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11",
-    "vite-plugin-dts": "^3.9.1",
-    "vitest": "^1.6.0"
+    "@biomejs/biome": "2.1.2",
+    "@types/node": "24.1.0",
+    "typescript": "5.8.3",
+    "vite": "7.0.6",
+    "vite-plugin-dts": "4.5.4",
+    "vitest": "3.2.4"
   },
-  "prettier": "@jvdx/prettier-config",
-  "prettierIgnore": [
-    "tests/",
-    "dist/"
-  ],
   "dependencies": {
-    "queue-lit": "^3.0.0"
+    "queue-lit": "3.0.0"
   }
 }
