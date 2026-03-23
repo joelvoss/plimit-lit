@@ -50,7 +50,7 @@ describe(`pLimit`, () => {
 		const end = timeSpan();
 		const limit = pLimit(1);
 
-		const mapper = ([value, ms]) =>
+		const mapper = ([value, ms]: [unknown, number]) =>
 			limit(async () => {
 				await delay(ms);
 				return value;
@@ -85,7 +85,7 @@ describe(`pLimit`, () => {
 		let thrown = false;
 		try {
 			await limit(() => null);
-		} catch (_) {
+		} catch {
 			thrown = true;
 		}
 

@@ -35,12 +35,13 @@
     "build": "./Taskfile.sh build"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
-    "@types/node": "24.1.0",
-    "typescript": "5.8.3",
-    "vite": "7.0.6",
-    "vite-plugin-dts": "4.5.4",
-    "vitest": "3.2.4"
+    "@types/node": "25.5.0",
+    "oxfmt": "0.41.0",
+    "oxlint": "1.56.0",
+    "typescript": "6.0.2",
+    "vite": "8.0.2",
+    "vite-plugin-bundle-dts": "0.2.0",
+    "vitest": "4.1.1"
   },
   "dependencies": {
     "queue-lit": "3.0.0"
