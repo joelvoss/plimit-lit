@@ -1,8 +1,9 @@
 import { describe, expect, test } from 'vitest';
+
 import { pLimit } from '../src/index';
 
 function delay(ms: number) {
-	return new Promise(r => setTimeout(r, ms));
+	return new Promise((r) => setTimeout(r, ms));
 }
 
 function inRange(num: number, { start = 0, end = 0 }) {
@@ -56,7 +57,7 @@ describe(`pLimit`, () => {
 				return value;
 			});
 
-		const result = await Promise.all(input.map(x => mapper(x)));
+		const result = await Promise.all(input.map((x) => mapper(x)));
 		expect(result).toEqual([10, 20, 30]);
 		expect(inRange(end(), { start: 590, end: 650 })).toEqual(true);
 	});
@@ -114,7 +115,7 @@ describe(`pLimit`, () => {
 		const limit = pLimit(1);
 		const symbol = Symbol('test');
 
-		await limit(a => {
+		await limit((a) => {
 			expect(a).toEqual(symbol);
 		}, symbol);
 	});

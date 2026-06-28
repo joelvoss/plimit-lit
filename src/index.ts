@@ -89,7 +89,7 @@ export function pLimit(concurrency: number) {
 	 * returning functions while limiting their concurrency.
 	 */
 	const generator: GeneratorFn = (fn, ...args) =>
-		new Promise(resolve => {
+		new Promise((resolve) => {
 			enqueue(fn, resolve, args);
 		});
 
